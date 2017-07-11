@@ -66,7 +66,7 @@ $VetB = [];
 //
 // Our stopping condition will be
 //
-$STOP = 10;
+$STOP = 5;
 
 //
 // start
