@@ -28,4 +28,4 @@ VetA and VetB with 10 random positions.
 
 # Example of operation
 
-![image](https://github.com/jeffotoni/)
+![image](https://github.com/jeffotoni/phpconcurrency/blob/master/gif/phpconcurrency.gif)
