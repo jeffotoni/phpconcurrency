@@ -13,6 +13,14 @@
 */
 
 //
+// Function that generates our random seed
+//
+function MySeed($inicio, $fim) {
+
+	return mt_rand($inicio, $fim);	
+}
+
+//
 // Mile seconds
 //
 define("TIME", 1000);
@@ -28,14 +36,26 @@ $j = 0 ;
 define("SCOPE_FUNC1_USLEEP", 800);
 
 //
+// My Seed escope 1 -> 0 .. 100
+//
+define("SCOPE_FUNC1_SEED_I", 0);
+define("SCOPE_FUNC1_SEED_F", 100);
+
+//
 // Declaring our accountants off ESCOPE 2
 //
 $n = 0 ;
 
 //
-// Wait please scope 1
+// Wait please scope 2
 //
 define("SCOPE_FUNC2_USLEEP", 500);
+
+//
+// My Seed escope 2 -> 200 .. 300
+//
+define("SCOPE_FUNC2_SEED_I", 200);
+define("SCOPE_FUNC2_SEED_F", 300);
 
 //
 // Declaring VetA and VetB
@@ -83,30 +103,40 @@ SCOPE_FUNC1 :
 	//
 	// Generating any random value to fill our Vet
 	//
-	$semente = MySeed(0,100);
+	$seed = MySeed(SCOPE_FUNC1_SEED_I,SCOPE_FUNC1_SEED_F);
 
 	//
 	// Filling our Vet with generated seed skin values
 	//
-	$VetA[$j] = "I am thread 1 and I waited 1 seconds VetA[$j] = $semente";
+	$VetA[$j] = "I am thread 1 and I waited 1 seconds VetA[{$j}] = {$seed}";
 	
 	//
+	// Present our vector on the screen
 	//
-	//
-	echo "\n";
-	echo $VetA[$j];
-	echo "\n";
+	print "\n";
+	print $VetA[$j];
+	print "\n";
 
 	//
+	// We have created a simple way to choose when to switch between VetA and VetB
 	//
-	//
-	if ($semente % 2 == 0 ) {
+	if ($seed % 2 == 0 ) {
+		
+		//
+		// Stop if you are already in stop condition
+		// If not send to another label
+		//
 		if ($j == $STOP)
 			goto END;
 		else
 			goto SCOPE_FUNC2;
 	}
 	else {
+
+		//
+		// Stop if you are already in stop condition
+		// If not send to another label
+		//
 		if ($j == $STOP)
 			goto END;
 		else
@@ -114,29 +144,52 @@ SCOPE_FUNC1 :
 	}
 
 //
-//
+// Our scope of function, our label
 //
 SCOPE_FUNC2 : 
-
-if ($n == $STOP)
-goto END;
-
-++ $n;
 	
-	$semente = MySeed(0,10);
+	//
+	// For our control structure if it reaches the stop condition
+	//
+	if ($n == $STOP)
+	goto END;
 	
-	$VetB[$n] = "I am thread 2 and I waited 1 seconds VetB[$n] = $semente";
+	//
+	// counter
+	// 
+	++ $n;
 	
-	echo "\n";
-	echo $VetB[$n];
-	echo "\n";
-
-
+	//
+	// wait please
+	//
 	usleep(TIME * SCOPE_FUNC2_USLEEP);
 
+	//
+	// Generating any random value to fill our Vet
+	//
+	$seed = MySeed(SCOPE_FUNC2_SEED_I,SCOPE_FUNC2_SEED_F);
 	
-	if ($semente % 2 == 0 ) {
+	//
+	// Filling our Vet with generated seed skin values
+	//
+	$VetB[$n] = "I am thread 2 and I waited 1 seconds VetB[{$n}] = {$seed}";
+	
+	//
+	// Present our vector on the screen
+	//
+	print "\n";
+	print $VetB[$n];
+	print "\n";
+
+	//
+	// We have created a simple way to choose when to switch between VetA and VetB
+	//	
+	if ($seed % 2 == 0 ) {
 		
+		//
+		// Stop if you are already in stop condition
+		// If not send to another label
+		//
 		if ($n == $STOP)
 			goto END;
 		else
@@ -144,39 +197,48 @@ goto END;
 	}
 	else {
 		
+		//
+		// Stop if you are already in stop condition
+		// If not send to another label
+		//
 		if ($n == $STOP)
 			goto END;
 		else
 			goto SCOPE_FUNC2;
 	}
 
-
+//
+// Scopo end, a label responsible for presenting 
+// a message when finalizing our program
+//
 END :
-if($n == $STOP && $j == $STOP)
-echo "\n End of the game !!\n";
+	
+	//
+	// Our stopping condition
+	//
+	if($n == $STOP && $j == $STOP)
+	print "\n===================== End of the game!! =======================";
+	
+	//
+	// Sending again to finalize the filling of our vector
+	//
+	if($n == $STOP && $j < $STOP)
+	goto SCOPE_FUNC1;
 
-if($n == $STOP && $j < $STOP)
-goto SCOPE_FUNC1;
+	//
+	// Sending again to finalize the filling of our vector
+	//
+	if($n < $STOP && $j == $STOP)
+	goto SCOPE_FUNC2;
+	
+	// 
+	// Print of the vectors on the screen
+	// 
+	print "\n*****************************************************************";
+	print "\nVetA :: ";
+	print_r($VetA);
+	print "\n*****************************************************************";
 
-if($n < $STOP && $j == $STOP)
-goto SCOPE_FUNC2;
-
-
-echo "\n";
-
-echo "\nVetA :: ";
-print_r($VetA);
-echo "\n";
-
-echo "\nVetB :: ";
-print_r($VetB);
-echo "\n";
-
-
-//
-// 
-//
-function MySeed($inicio, $fim) {
-
-	return mt_rand($inicio, $fim);	
-}
+	print "\nVetB :: ";
+	print_r($VetB);
+	print "\n*****************************************************************";
