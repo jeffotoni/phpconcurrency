@@ -6,6 +6,18 @@ Competition is not parallelism. Parallelism is when two or more threads are runn
 
 What I will demonstrate here is a simple example in PHP running in competition.
 
-One way to do this is to use c[lass.threds](http://php.net/manual/pt_BR/class.thread.php.)  
+One way to do this is to use [class.threds](http://php.net/manual/pt_BR/class.thread.php.)  
 
 I will use "GOTO" to compete with PHP, it is not an elegant and not the most indicated, but here we have the didactic objective and nothing else.
+
+[Goto](http://php.net/manual/en/control-structures.goto.php) can be used to jump to another section of the program.
+
+One can not jump into a loop or switch structure.
+
+One can jump out of them, and one common use is to use goto in place of a multi-level break.
+
+But in our example we will not do FOR, WHILE or better no control structure, we WILL USE OWN goto to generate OUR FOR.
+
+We will make a FOR without using "FOR" simply with goto, and that is where our example looks very interesting when we are going to compete.
+
+Our example will fill a vector but in competition.
