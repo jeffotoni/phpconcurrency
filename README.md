@@ -20,7 +20,7 @@ But in our example we will not do FOR, WHILE or better no control structure, we 
 
 We will make a FOR without using "FOR" simply with goto, and that is where our example looks very interesting when we are going to compete.
 
-Our example will fill 2 vectors but in concorrency.
+Our example will fill 2 vectors but in concurrency.
 
 VetA and VetB with 10 random positions.
 
@@ -28,5 +28,3 @@ VetA and VetB with 10 random positions.
 # Example of operation
 
 ![image](https://github.com/jeffotoni/phpconcurrency/blob/master/gif/phpconcurrency.gif)
-
-[![Demo CountPages alpha](https://share.gifyoutube.com/KzB6Gb.gif)](https://www.youtube.com/watch?v=ek1j272iAmc)
