@@ -23,3 +23,9 @@ We will make a FOR without using "FOR" simply with goto, and that is where our e
 Our example will fill 2 vectors but in competition.
 
 VetA and VetB with 10 random positions.
+
+
+
+# Example of operation
+
+![image](https://github.com/jeffotoni/)

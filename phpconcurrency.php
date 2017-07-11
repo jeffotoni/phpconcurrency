@@ -13,14 +13,29 @@
 */
 
 //
+// Mile seconds
+//
+define("TIME", 1000);
+
+//
 // Declaring our accountants off ESCOPE 1
 //
 $j = 0 ;
 
 //
+// Wait please scope 1
+//
+define("SCOPE_FUNC1_USLEEP", 800);
+
+//
 // Declaring our accountants off ESCOPE 2
 //
 $n = 0 ;
+
+//
+// Wait please scope 1
+//
+define("SCOPE_FUNC2_USLEEP", 500);
 
 //
 // Declaring VetA and VetB
@@ -45,43 +60,70 @@ sleep(1);
 
 
 //
-// 
+// Our scope of function, our label
 //
-SCOPE1 : 
+SCOPE_FUNC1 : 
 
-++ $j;
+	//
+	// For our control structure if it reaches the stop condition
+	//
+	if ($j == $STOP)
+	goto END;
+
+	//
+	// counter
+	// 
+	++ $j;
 	
-	$semente = MtRand(0,30);
+	//
+	// wait please
+	//
+	usleep(TIME * SCOPE_FUNC1_USLEEP);
+	
+	//
+	// Generating any random value to fill our Vet
+	//
+	$semente = MySeed(0,100);
 
+	//
+	// Filling our Vet with generated seed skin values
+	//
 	$VetA[$j] = "I am thread 1 and I waited 1 seconds VetA[$j] = $semente";
 	
+	//
+	//
+	//
 	echo "\n";
 	echo $VetA[$j];
 	echo "\n";
 
-	usleep(1000 * 500);
-	
+	//
+	//
+	//
 	if ($semente % 2 == 0 ) {
 		if ($j == $STOP)
 			goto END;
 		else
-			goto SCOPE2;
+			goto SCOPE_FUNC2;
 	}
 	else {
 		if ($j == $STOP)
 			goto END;
 		else
-			goto SCOPE1;
+			goto SCOPE_FUNC1;
 	}
 
 //
 //
 //
-SCOPE2 : 
+SCOPE_FUNC2 : 
+
+if ($n == $STOP)
+goto END;
 
 ++ $n;
 	
-	$semente = MtRand(0,10);
+	$semente = MySeed(0,10);
 	
 	$VetB[$n] = "I am thread 2 and I waited 1 seconds VetB[$n] = $semente";
 	
@@ -89,23 +131,23 @@ SCOPE2 :
 	echo $VetB[$n];
 	echo "\n";
 
-	//echo "\ny[$ii] = " . $n;
-	usleep(1000 * 300);
-	//sleep(1);
+
+	usleep(TIME * SCOPE_FUNC2_USLEEP);
+
 	
 	if ($semente % 2 == 0 ) {
 		
 		if ($n == $STOP)
 			goto END;
 		else
-			goto SCOPE1;
+			goto SCOPE_FUNC1;
 	}
 	else {
 		
 		if ($n == $STOP)
 			goto END;
 		else
-			goto SCOPE2;
+			goto SCOPE_FUNC2;
 	}
 
 
@@ -113,11 +155,12 @@ END :
 if($n == $STOP && $j == $STOP)
 echo "\n End of the game !!\n";
 
-else if($j < $STOP)
-goto SCOPE1;
+if($n == $STOP && $j < $STOP)
+goto SCOPE_FUNC1;
 
-else if($n < $STOP)
-goto SCOPE2;
+if($n < $STOP && $j == $STOP)
+goto SCOPE_FUNC2;
+
 
 echo "\n";
 
@@ -133,7 +176,7 @@ echo "\n";
 //
 // 
 //
-function MtRand($inicio, $fim) {
+function MySeed($inicio, $fim) {
 
 	return mt_rand($inicio, $fim);	
 }
