@@ -20,4 +20,6 @@ But in our example we will not do FOR, WHILE or better no control structure, we 
 
 We will make a FOR without using "FOR" simply with goto, and that is where our example looks very interesting when we are going to compete.
 
-Our example will fill a vector but in competition.
+Our example will fill 2 vectors but in competition.
+
+VetA and VetB with 10 random positions.
